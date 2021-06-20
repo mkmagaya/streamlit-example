@@ -4,35 +4,35 @@ import math
 import pandas as pd
 import streamlit as st
 
-"""
-# Welcome to Streamlit!
+html_render_title = """
+    <style="color:black;text-align:center;>KBS Assignment 2</style>
+    """ 
+html_temp = """
+	<div style ="background-color:yellow;padding:13px">
+	<h1 style ="color:black;text-align:left;">Keras & OpenCV Project</h1>
+	</div>
+	"""
+html_side_temp = """
+	<div style ="padding:13px">
+	<h1 style ="color:black;text-align:center;">Project Engineers</h1>
+    <h3 style ="color:black;text-align:center;">Magaya Makomborero r181571b</h3>
+    <h3 style ="color:black;text-align:center;">Mabhuka Oswell r181573f</h3>
+	</div>
+	"""    
+st.title("KBS Assignment 2")
+st.markdown(html_temp, unsafe_allow_html = True)
+# students = st.markdown(html_side_temp, unsafe_allow_html = True)
+st.sidebar.markdown(html_side_temp, unsafe_allow_html = True)
 
-Edit `/streamlit_app.py` to customize this app to your heart's desire :heart:
+title_container = st.beta_container()
+col1, col2 = st.beta_columns([1, 20])
+image = Image.open(st.file_uploader("Upload a Video:", type=["mp4"]))
+with title_container:
+    with col1:
+        st.image(image, width=64)
+    with col2:
+        st.markdown('<h1 style="color: purple;">Suzieq</h1>',
+            unsafe_allow_html=True)
 
-If you have any questions, checkout our [documentation](https://docs.streamlit.io) and [community
-forums](https://discuss.streamlit.io).
-
-In the meantime, below is an example of what you can do with just a few lines of code:
-"""
-
-
-with st.echo(code_location='below'):
-    total_points = st.slider("Number of points in spiral", 1, 5000, 2000)
-    num_turns = st.slider("Number of turns in spiral", 1, 100, 9)
-
-    Point = namedtuple('Point', 'x y')
-    data = []
-
-    points_per_turn = total_points / num_turns
-
-    for curr_point_num in range(total_points):
-        curr_turn, i = divmod(curr_point_num, points_per_turn)
-        angle = (curr_turn + 1) * 2 * math.pi * i / points_per_turn
-        radius = curr_point_num / total_points
-        x = radius * math.cos(angle)
-        y = radius * math.sin(angle)
-        data.append(Point(x, y))
-
-    st.altair_chart(alt.Chart(pd.DataFrame(data), height=500, width=500)
-        .mark_circle(color='#0068c9', opacity=0.5)
-        .encode(x='x:Q', y='y:Q'))
+imagesLocation = "./kbsLogFiles/frames/*.jpg"
+images = glob.glob(imagesLocation)
